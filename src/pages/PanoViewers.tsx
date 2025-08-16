@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture, Html } from "@react-three/drei";
-import { Suspense, useState, useEffect } from "react";
+import { Suspense, useState } from "react";
 import { a, useSpring } from "@react-spring/three";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
@@ -33,15 +33,13 @@ function Panorama({ src }: { src: string }) {
   const texture = useTexture(src);
   useTexture.preload("/panos/cuarto-1.jpg");
   useTexture.preload("/panos/cuarto-2.jpg");
-  const [visible, setVisible] = useState(false);
 
   // animación de opacidad
   const { opacity } = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
     reset: true,
-    config: { duration: 800 },
-    onStart: () => setVisible(true),
+    config: { duration: 800 }
   });
 
   return (
