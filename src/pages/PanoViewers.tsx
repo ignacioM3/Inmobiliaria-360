@@ -1,7 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture, Html } from "@react-three/drei";
 import { Suspense, useState } from "react";
-import { a, useSpring } from "@react-spring/three";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 type Scene = {
@@ -31,28 +30,19 @@ const scenes: Scene[] = [
 
 function Panorama({ src }: { src: string }) {
   const texture = useTexture(src);
+
+  // precargar imágenes
   useTexture.preload("/panos/cuarto-1.jpg");
   useTexture.preload("/panos/cuarto-2.jpg");
 
-  // animación de opacidad
-  const { opacity } = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: 1 },
-    reset: true,
-    config: { duration: 800 }
-  });
-
   return (
-    <a.mesh>
+    <mesh>
       <sphereGeometry args={[500, 60, 40]} />
-      <a.meshBasicMaterial
+      <meshBasicMaterial
         map={texture}
-        side={1}
-        transparent
-        opacity={opacity}
+        side={2} // usar BackSide para ver desde adentro sin invertir controles
       />
-      <primitive object={{ scale: { x: -1, y: 1, z: 1 } } as any} />
-    </a.mesh>
+    </mesh>
   );
 }
 
