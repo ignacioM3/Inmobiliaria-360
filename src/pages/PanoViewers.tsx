@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useTexture, Html } from "@react-three/drei";
 import { Suspense, useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import { isMobile } from "react-device-detect";
 
 type Scene = {
   id: string;
@@ -38,10 +39,7 @@ function Panorama({ src }: { src: string }) {
   return (
     <mesh>
       <sphereGeometry args={[500, 60, 40]} />
-      <meshBasicMaterial
-        map={texture}
-        side={2} // usar BackSide para ver desde adentro sin invertir controles
-      />
+      <meshBasicMaterial map={texture} side={2} />
     </mesh>
   );
 }
@@ -86,7 +84,11 @@ export default function TourViewer() {
               onClick={() => setSceneId(h.target)}
             />
           ))}
-          <OrbitControls enablePan={false} enableZoom={true} />
+          <OrbitControls
+            enablePan={false}
+            enableZoom={true}
+            rotateSpeed={isMobile ? -1 : 1}
+          />
         </Suspense>
       </Canvas>
     </div>
