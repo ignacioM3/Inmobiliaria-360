@@ -87,7 +87,7 @@ export default function TourViewer() {
           <OrbitControls
             enablePan={false}
             enableZoom={true}
-            rotateSpeed={isMobile ? -1 : 1}
+            rotateSpeed={isMobile ? 0.5 : 1} // más lento en mobile
           />
         </Suspense>
       </Canvas>
