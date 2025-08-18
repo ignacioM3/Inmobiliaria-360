@@ -67,7 +67,7 @@ function Hotspot({
   );
 }
 
-export default function TourViewer() {
+export function TourViewer() {
   const [sceneId, setSceneId] = useState("cuarto1");
   const scene = scenes.find((s) => s.id === sceneId)!;
 
@@ -87,7 +87,7 @@ export default function TourViewer() {
           <OrbitControls
             enablePan={false}
             enableZoom={true}
-            rotateSpeed={isMobile ? 0.5 : 1} // más lento en mobile
+            rotateSpeed={isMobile ? -0.5 : 1} // más lento en mobile
           />
         </Suspense>
       </Canvas>
