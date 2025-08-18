@@ -3,6 +3,7 @@ import { OrbitControls, useTexture, Html } from "@react-three/drei";
 import { Suspense, useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { isMobile } from "react-device-detect";
+import { IoClose } from "react-icons/io5";
 
 type Scene = {
   id: string;
@@ -72,7 +73,10 @@ export function TourViewer() {
   const scene = scenes.find((s) => s.id === sceneId)!;
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
+    <div style={{ width: "100%", height: "100vh" }} className="relative">
+      <button type="button" className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer text-3xl z-10 transition-colors">
+        <IoClose />
+      </button>
       <Canvas camera={{ position: [0, 0, 0.1], fov: 75 }}>
         <Suspense fallback={null}>
           <Panorama src={scene.src} />
